@@ -10,7 +10,7 @@ function App() {
 <Routes>
 <Route path="/" element={<Introduce />}> </Route>
 
-<Route path='/quiz/:difficulty/:amount' element={<Quiz />}>
+<Route path='/quiz/:category/:difficulty/:amount' element={<Quiz />}>
 
 </Route>
 </Routes>

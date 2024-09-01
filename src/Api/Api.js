@@ -4,9 +4,9 @@ const shuffleArray=(array)=>{
   return [...array].sort(()=>Math.random()-0.5) 
 }
 
-export  const quizapi=async (difficulty,amount)=>{
+export  const quizapi=async (difficulty,amount,category)=>{
   try {
-  const url=`https://opentdb.com/api.php?${difficulty}&amount=${amount}`
+  const url=`https://opentdb.com/api.php?${difficulty}&amount=${amount}&category=${category}`
   const response = await axios.get(url);
   const data = response.data; // API'den gelen veriye buradan erişiyoruz
  return data.results.map((question)=>

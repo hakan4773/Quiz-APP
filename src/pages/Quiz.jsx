@@ -5,17 +5,17 @@ import *as Api from '../Api/Api';
 import Modal from '../components/Modal';
 
 function Quiz() {
-  const {difficulty,amount}=useParams();
+  const {difficulty,amount,category}=useParams();
   const [questions, setQuestions] = useState([]); //sorular için state
   const [loading, setLoading] = useState(true);  //yükleniyor yazısı için sstate
   const [error, setError] = useState(null);//hatalar için state
-  const [score,setScore]=useState(0)
-  const [count,setCount]=useState(0)
-  const [modal,setModal]=useState(false)
+  const [score,setScore]=useState(0) //scoru tutan state
+  const [count,setCount]=useState(0) //sayfa indexini tutan state
+  const [modal,setModal]=useState(false) //sonucu gösteren state
   const [trueanswer,setTrueanswer]=useState([])  //CEVAPLARI TUTAN STATE
 console.log(questions)
   useEffect(() => {
-    Api.quizapi(difficulty, amount)
+    Api.quizapi(difficulty, amount,category)
       .then(data => {
         setQuestions(data);
         setLoading(false);
@@ -28,10 +28,9 @@ console.log(questions)
 
   if (loading) return <div>Yükleniyor...</div>;
   if (error) return <div>Hata: {error}</div>;
-
+  
   return (
     <div className='w-full h-screen flex overflow-hidden items-center justify-center bg-purple-600'>
-
       { modal ? <Modal score={score}  setTrueanswer={setTrueanswer}   trueanswer={trueanswer} /> : 
           <QuestionsCard 
           questions={questions} 
@@ -47,10 +46,6 @@ console.log(questions)
           trueanswer={trueanswer} //
         />
       }
-       
-     
- 
-    
     </div>
   );
 }
